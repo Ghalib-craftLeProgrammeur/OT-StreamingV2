@@ -39,7 +39,7 @@ app.post('/addEpisode', (req, res) => {
 // Route handler for the root URL
 app.get('/', (req, res) => {
     // Use 'path' to send the index.html file
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
 app.listen(port, () => {
