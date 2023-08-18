@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>OT Streaming</title>
+</head>
+<body>
+    <header>
+        <h1>OT Streaming</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Accueil</a></li>
+                <li><a href="#" id="category-link">Catégories</a></li>
+                <li><a href="#">Recherche</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="featured">
+        <h2>Anime en vedette</h2>
+        <!-- Add thumbnail images for featured anime here -->
+        <div class="thumbnail-container">
+            <a href="anime.html?name=Naruto"><img src="https://m.media-amazon.com/images/M/MV5BZmQ5NGFiNWEtMmMyMC00MDdiLTg4YjktOGY5Yzc2MDUxMTE1XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_.jpg" width="140" alt="Featured Anime 1"></a>
+            <a href="anime.html?name=featured2"><img src="featured2.jpg" alt="Featured Anime 2"></a>
+            <a href="admin/index.html"><img src="featured2.jpg" alt="Featureds Anime 2"></a>
+          
+            <!-- Add more featured anime thumbnails here -->
+        </div>
+    </section>
+    
+    <section class="categories">
+        <h2>Catégories populaires</h2>
+        <div class="category-card">
+            <h3>Action</h3>
+        </div>
+        <div class="category-card">
+            <h3>Comédie</h3>
+        </div>
+        <!-- Add more categories here -->
+        <div class="category-card">
+           <h3>Drame</h3>
+        </div>
+        <div class="category-card">
+             <h3>Aventure</h3>
+        </div>
+        <!-- Add more categories here -->
+    </section>
+    
+    <footer>
+        <p>&copy; 2023 OT Streaming. Tous droits réservés.</p>
+    </footer>
+
+    <!-- Category Popup -->
+    <div class="category-popup" id="category-popup">
+        <div class="category-list">
+            <h2>Toutes les catégories</h2>
+            <ul>
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Comédie</a></li>
+                <li><a href="#">Drame</a></li>
+                <li><a href="#">Aventure</a></li>
+                <!-- Add more categories here -->
+            </ul>
+            <span class="close-popup" id="close-popup">&times;</span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

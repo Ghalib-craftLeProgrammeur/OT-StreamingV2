@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Add Episode - Admin Panel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        main {
+            background-color: #ffffff;
+            padding: 21px;
+            border-radius: 10px;
+            box-shadow: 4 4px 4px rgba(0, 0, 0, 0.1);
+            width: 410px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 16px;
+        }
+
+        textarea {
+            resize: vertical;
+            height: 100px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #3498db;
+            color: #ffffff;
+            border: none;
+            border-radius: 3px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <header>
+    
+    
+    <main>
+        <form id="episode-form">
+            <h1>Admin Panel</h1>
+            <label for="anime">Anime:</label>
+            <input type="text"style="width: 400px;" id="anime" name="anime" required><br>
+            
+            <label for="episodeNumber">Episode Number:</label>
+            <input type="number" style="width: 400px;"id="episodeNumber" name="episodeNumber" required><br>
+            
+            <label for="embedCode">Embed Code:</label>
+            <input id="embedCode" style="width: 400px; height: 100px;" name="embedCode" required ></textarea><br>
+            
+            <label for="nextEpisode">Next Episode:</label>
+            <input type="number" style="width: 400px;" id="nextEpisode" name="nextEpisode" required><br>
+            
+            <button type="submit" style="width: 422px;">Add Episode</button>
+        </form>
+    </main>
+
+    <footer>
+        <p style="margin-left: 80px;">&copy; 2023 OT Streaming. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        document.getElementById('episode-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const anime = document.getElementById('anime').value;
+            const episodeNumber = document.getElementById('episodeNumber').value;
+            const embedCode = document.getElementById('embedCode').value;
+            const nextEpisode = document.getElementById('nextEpisode').value;
+
+            const episodeData = {
+                anime,
+                episodeNumber: parseInt(episodeNumber),
+                embedCode,
+                nextEpisode: parseInt(nextEpisode)
+            };
+
+            try {
+                const response = await fetch('/addEpisode', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(episodeData)
+                });
+
+                if (response.ok) {
+                    alert('Episode added successfully!');
+                    document.getElementById('episode-form').reset();
+                } else {
+                    alert('Error adding episode');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred');
+            }
+        });
+    </script>
+</body>
+</html>
