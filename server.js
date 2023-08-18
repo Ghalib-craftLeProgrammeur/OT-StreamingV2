@@ -35,6 +35,12 @@ app.post('/addEpisode', (req, res) => {
     }
 });
 
+// Route handler for the root URL
+app.get('/', (req, res) => {
+    // You can serve your HTML content here or perform other actions
+    res.send('Welcome to OT Streaming!');
+});
+
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
