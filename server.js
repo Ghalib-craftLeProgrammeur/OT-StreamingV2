@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs');
+const path = require('path'); // Import the 'path' module
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -37,8 +38,8 @@ app.post('/addEpisode', (req, res) => {
 
 // Route handler for the root URL
 app.get('/', (req, res) => {
-    // You can serve your HTML content here or perform other actions
-    res.send('Welcome to OT Streaming!');
+    // Use 'path' to send the index.html file
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.listen(port, () => {
