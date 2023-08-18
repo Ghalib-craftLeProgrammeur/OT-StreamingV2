@@ -8,9 +8,9 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 
 // Serve static files (including data.json)
-app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Route to get anime details
+// Route to get anime dvetails
 app.get('/getAnimeDetails', (req, res) => {
     const animeName = req.query.name;
     const data = JSON.parse(fs.readFileSync('data.json', 'utf8'));
@@ -36,11 +36,6 @@ app.post('/addEpisode', (req, res) => {
     }
 });
 
-// Route handler for the root URL
-app.get('/', (req, res) => {
-    // Use 'path' to send the index.html file
-    res.sendFile(path.join(__dirname, 'public/index.html'));
-});
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
