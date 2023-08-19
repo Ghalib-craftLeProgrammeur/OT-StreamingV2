@@ -39,6 +39,9 @@ app.post('/addEpisode', (req, res) => {
     const data = JSON.parse(fs.readFileSync('data.json', 'utf8'));
     const animeIndex = data.findIndex(anime => anime.title === newEpisode.anime);
     if (animeIndex !== -1) {
+        if (!data[animeIndex].episodes) {
+            data[animeIndex].episodes = []; // Initialize episodes as an empty array if not already defined
+        }
         data[animeIndex].episodes.push(newEpisode);
         fs.writeFileSync('data.json', JSON.stringify(data, null, 2), 'utf8');
         res.json({ message: 'Episode added successfully' });
