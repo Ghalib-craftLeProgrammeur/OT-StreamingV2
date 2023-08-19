@@ -15,7 +15,7 @@ OT Streaming is a web application that allows users to watch and stream anime ep
 
 1. Clone this repository to your local machine.
    ```bash
-      git clone https://github.com/your-username/ot-streaming.git
+   git clone https://github.com/your-username/ot-streaming.git
 2. Navigate to the project directory.
 
 
