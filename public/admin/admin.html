@@ -16,7 +16,7 @@
         <div class="grid-container">
      
         <div class="box">
-            <button id="addepisodebtn" onclick="toggleFormVisibility('episode-form')" class="addepisodebtn">Add Episode</button>
+            <button id="addepisodebtn" class="addepisodebtn">Add Episode</button>
             
         <form id="episode-form" style="display: none;">
            
@@ -36,7 +36,7 @@
         </form>
         </div>
         <div class="box">
-            <button id="addAnimeButton" onclick="toggleFormVisibility('addAnimeForm')" class="add-anime-button">Add Anime</button>
+            <button id="addAnimeButton"  class="add-anime-button">Add Anime</button>
           
         <form class="add-anime-form" id="addAnimeForm">
             <h2>Add New Anime</h2>
@@ -66,7 +66,7 @@
         </div>
 
         <div class="box">
-            <button id="addFeaturedAnime" onclick="toggleFormVisibility('add-featured-anime-form')"class="delete-episode-button" style="width: 422px;">Add Featured Anime </button>
+            <button id="addFeaturedAnime"class="delete-episode-button" style="width: 422px;">Add Featured Anime </button>
        
             
             <form id="add-featured-anime-form" style="display: none;">
@@ -87,8 +87,8 @@
     </footer>
 
     <script>
-        const Featureds = document.getElementById('delete-episode-form');
-    const deleteEpisodeForm = document.getElementById('');
+        const Featureds = document.getElementById('addFeaturedAnime');
+    const deleteEpisodeForm = document.getElementById('delete-episode-form');
 Featureds.addEventListener('click', () => {
    toggleFormVisibility('add-featured-anime-form');
 })

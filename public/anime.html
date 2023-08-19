@@ -48,20 +48,26 @@
 
         // Function to fetch and display anime details based on query parameter
         function loadAnimeDetails() {
-            const animeInfo = document.getElementById('anime-info');
-            const animeName = getQueryParam('name');
+    const animeInfo = document.getElementById('anime-info');
+    const animeName = getQueryParam('name');
 
-            // Fetch anime details from the server
-            fetch(`/getAnimeDetails?name=${animeName}`)
-                .then(response => response.json())
-                .then(animeDetails => {
-                    const episodes = animeDetails.episodes;
-                    const episodesContainer = document.createElement('div');
+    // Fetch anime details from the server
+    fetch(`/getAnimeDetails?name=${animeName}`)
+        .then(response => response.json())
+        .then(animeDetails => {
+            const episodes = animeDetails.animeList.episodes; // Access episodes array
 
-                    let currentEpisodeIndex = 0;
-                    const displayEpisode = (episodeIndex) => {
+            if (episodes && episodes.length > 0) {
+                const episodesContainer = document.createElement('div');
+                animeInfo.innerHTML = ''; // Clear existing content
+
+                let currentEpisodeIndex = 0;
+
+                const displayEpisode = (episodeIndex) => {
+                    if (episodeIndex >= 0 && episodeIndex < episodes.length) {
                         const episode = episodes[episodeIndex];
-                        episodesContainer.innerHTML = '';
+
+                        episodesContainer.innerHTML = ''; // Clear existing content
 
                         const episodeElement = document.createElement('div');
                         episodeElement.classList.add('episode');
@@ -92,18 +98,23 @@
                         episodeElement.appendChild(embedCode);
                         episodeElement.appendChild(navigation);
                         episodesContainer.appendChild(episodeElement);
-                    };
 
-                    displayEpisode(currentEpisodeIndex);
+                        animeInfo.innerHTML = ''; // Clear existing content
+                        animeInfo.appendChild(episodesContainer);
+                    }
+                };
 
-                    animeInfo.innerHTML = '';
-                    animeInfo.appendChild(episodesContainer);
-                })
-                .catch(error => {
-                    console.error('Error fetching anime details:', error);
-                    animeInfo.innerText = "Anime doesn't have any episode";
-                });
-        }
+                displayEpisode(currentEpisodeIndex);
+            } else {
+                animeInfo.innerText = "Anime doesn't have any episode";
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching anime details:', error);
+            animeInfo.innerText = "Error fetching anime details";
+        });
+}
+
 
         // Call the loadAnimeDetails function when the page loads
         window.onload = loadAnimeDetails;

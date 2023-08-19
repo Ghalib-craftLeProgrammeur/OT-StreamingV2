@@ -63,6 +63,23 @@ app.post('/addFeaturedAnime', (req, res) => {
     fs.writeFileSync('data.json', JSON.stringify(data, null, 2), 'utf8');
     res.json({ message: 'Featured anime added successfully' });
 });
+// Route to get anime details
+app.get('/getAnimeDetails', (req, res) => {
+    const animeName = req.query.name;
+    const data = JSON.parse(fs.readFileSync('data.json', 'utf8'));
+
+    const animeDetails = {
+        featuredAnime: data.featuredAnime,
+        animeList: data.animeList.find(anime => anime.title === animeName)
+    };
+
+    if (animeDetails.animeList) {
+        res.json(animeDetails);
+    } else {
+        res.status(404).json({ error: 'Anime not found' });
+    }
+});
+
 
 
 // Route to get the list of featured anime
@@ -117,6 +134,9 @@ app.post('/addAnime', (req, res) => {
     fs.writeFileSync('data.json', JSON.stringify(data, null, 2), 'utf8');
     res.json({ message: 'New anime added successfully' });
 });
+
+
+
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
