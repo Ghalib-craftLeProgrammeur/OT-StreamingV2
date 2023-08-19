@@ -13,6 +13,7 @@
     {
       "title": "Naruto",
       "description": "A popular anime series about ninjas.",
+      "totalEpisodes": 220,
       "episodes": [
         {
           "anime": "Naruto",
@@ -27,6 +28,11 @@
           "nextEpisode": 3
         }
       ]
+    },
+    {
+      "title": "OnePiece",
+      "totalEpisodes": 1027,
+      "episodes": []
     }
   ]
 }

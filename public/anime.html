@@ -56,9 +56,11 @@
         .then(response => response.json())
         .then(animeDetails => {
             const episodes = animeDetails.animeList.episodes; // Access episodes array
+            const totalEpisodes = animeDetails.animeList.totalEpisodes; // Access totalEpisodes value
 
             if (episodes && episodes.length > 0) {
                 const episodesContainer = document.createElement('div');
+                
                 animeInfo.innerHTML = ''; // Clear existing content
 
                 let currentEpisodeIndex = 0;
@@ -91,6 +93,11 @@
                         nextEpisodeButton.addEventListener('click', () => {
                             displayEpisode(episodeIndex + 1);
                         });
+    // Display the total number of episodes
+    const totalEpisodesElement = document.createElement('p');
+                    totalEpisodesElement.textContent = `${episodeIndex + 1} / ${totalEpisodes} episodes`;
+                    totalEpisodesElement.classList.add('total-episodes');
+                    episodesContainer.appendChild(totalEpisodesElement);
 
                         navigation.appendChild(prevEpisodeButton);
                         navigation.appendChild(nextEpisodeButton);

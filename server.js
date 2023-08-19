@@ -48,6 +48,7 @@ app.post('/addEpisode', (req, res) => {
     } else {
         res.status(404).json({ error: 'Anime not found' });
     }
+    
 });
 app.post('/addFeaturedAnime', (req, res) => {
     const newFeaturedAnime = req.body;
@@ -108,14 +109,14 @@ app.delete('/deleteEpisode', (req, res) => {
         res.status(404).json({ error: 'Anime not found' });
     }
 });
-// Route to add a new anime
 app.post('/addAnime', (req, res) => {
     const newAnime = req.body;
     const data = JSON.parse(fs.readFileSync('data.json', 'utf8'));
 
     // Check if the anime already exists
-    const existingAnime = data.find(anime => anime.title === newAnime.title);
-    if (existingAnime) {
+    const existingAnimeIndex = data.animeList.findIndex(anime => anime.title === newAnime.title);
+
+    if (existingAnimeIndex !== -1) {
         res.status(400).json({ error: 'Anime already exists' });
         return;
     }
@@ -127,13 +128,15 @@ app.post('/addAnime', (req, res) => {
         episodes: [] // Initialize episodes as an empty array
     };
 
-    // Add the new anime object to the data array
-    data.push(animeObject);
+    // Add the new anime object to the animeList array
+    data.animeList.push(animeObject);
 
     // Write the updated data to the data.json file
     fs.writeFileSync('data.json', JSON.stringify(data, null, 2), 'utf8');
     res.json({ message: 'New anime added successfully' });
 });
+
+
 
 
 
