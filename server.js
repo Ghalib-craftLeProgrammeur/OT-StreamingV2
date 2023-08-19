@@ -46,6 +46,23 @@ app.post('/addEpisode', (req, res) => {
         res.status(404).json({ error: 'Anime not found' });
     }
 });
+app.post('/addFeaturedAnime', (req, res) => {
+    const newFeaturedAnime = req.body;
+    const data = JSON.parse(fs.readFileSync('data.json', 'utf8'));
+
+    // Add the new featured anime to the list
+    data.featuredAnime.push(newFeaturedAnime);
+
+    // Write the updated data to the data.json file
+    fs.writeFileSync('data.json', JSON.stringify(data, null, 2), 'utf8');
+    res.json({ message: 'Featured anime added successfully' });
+});
+
+// Route to get the list of featured anime
+app.get('/getFeaturedAnime', (req, res) => {
+    const data = JSON.parse(fs.readFileSync('data.json', 'utf8'));
+    res.json(data.featuredAnime);
+});
 // Route to delete an episode
 app.delete('/deleteEpisode', (req, res) => {
     const animeTitle = req.body.anime;

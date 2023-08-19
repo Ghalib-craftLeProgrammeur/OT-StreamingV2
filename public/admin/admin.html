@@ -11,11 +11,13 @@
     <header>
     <!-- ... -->
 
-    <main>
+   
         <h1>Admin Panel</h1>
+        <div class="grid-container">
+     
+        <div class="box">
+            <button id="addepisodebtn" onclick="toggleFormVisibility('episode-form')" class="addepisodebtn">Add Episode</button>
             
-        <button type="submit" id="addepisodebtn" class="addepisodebtn"  style="width: 422px;">Add Episode</button>
-          
         <form id="episode-form" style="display: none;">
            
             <label for="anime">Anime:</label>
@@ -32,9 +34,10 @@
             
             <button type="submit" style="width: 422px;">Add Episode</button>
         </form>
-        
-        <button id="addAnimeButton" class="add-anime-button"  style="width: 422px;">Add Anime</button>
-        
+        </div>
+        <div class="box">
+            <button id="addAnimeButton" onclick="toggleFormVisibility('addAnimeForm')" class="add-anime-button">Add Anime</button>
+          
         <form class="add-anime-form" id="addAnimeForm">
             <h2>Add New Anime</h2>
             <label for="newAnimeName" >Anime Name:</label>
@@ -47,20 +50,36 @@
 
             <button type="submit" style="width: 380px;">Add Anime</button>
         </form>
-        <button id="deleteEpisodeButton" class="delete-episode-button" style="width: 422px;">Delete Episode</button>
+        </div>
+        <div class="box">
+            <button id="deleteEpisodeButton" class="delete-episode-button">Delete Episode</button>
+            
+        <form id="delete-episode-form" style="display: none;">
+            <label for="deleteAnime">Anime Name:</label>
+            <input type="text" style="width: 400px;" id="deleteAnime" name="deleteAnime" required><br>
+        
+            <label for="deleteEpisodeNumber">Episode Number:</label>
+            <input type="number" style="width: 400px;" id="deleteEpisodeNumber" name="deleteEpisodeNumber" required><br>
+        
+            <button type="submit" style="width: 422px;">Delete Episode</button>
+        </form>
+        </div>
 
-<form class="delete-episode-form" id="deleteEpisodeForm" style="display: none;">
-    <h2>Delete Episode</h2>
-    <label for="deleteAnime">Anime Name:</label>
-    <input type="text" style="width: 360px;" id="deleteAnime" name="deleteAnime" required><br>
-
-    <label for="deleteEpisodeNumber">Episode Number:</label>
-    <input type="number" style="width: 360px;" id="deleteEpisodeNumber" name="deleteEpisodeNumber" required><br>
-
-    <button type="submit" style="width: 380px;">Delete Episode</button>
-</form>
-
-    </main>
+        <div class="box">
+            <button id="addFeaturedAnime" onclick="toggleFormVisibility('add-featured-anime-form')"class="delete-episode-button" style="width: 422px;">Add Featured Anime </button>
+       
+            
+            <form id="add-featured-anime-form" style="display: none;">
+                <h2>Add Featured Anime</h2>
+                <label for="featuredAnimeName">Featured Anime Name:</label>
+                <input type="text" style="width: 420px;" id="featuredAnimeName" name="featuredAnimeName" required><br>
+                <label for="featuredAnimeThumbnail">Featured Anime Thumbnail URL:</label>
+                <input type="text" style="width: 420px;" id="featuredAnimeThumbnail" name="featuredAnimeThumbnail" required><br>
+                <button type="submit">Add Featured Anime</button>
+            </form>
+        </div>
+        </div>
+    </div>
     
     
     <footer>
@@ -68,23 +87,54 @@
     </footer>
 
     <script>
-       // Delete Episode
-const deleteEpisodeButton = document.getElementById('deleteEpisodeButton');
-const deleteEpisodeForm = document.getElementById('deleteEpisodeForm');
-
-deleteEpisodeButton.addEventListener('click', () => {
-    deleteEpisodeForm.style.display = 'block';
+        const Featureds = document.getElementById('delete-episode-form');
+    const deleteEpisodeForm = document.getElementById('');
+Featureds.addEventListener('click', () => {
+   toggleFormVisibility('add-featured-anime-form');
+})
+document.getElementById('deleteEpisodeButton').addEventListener('click', () => {
+    toggleFormVisibility('delete-episode-form');
 });
+document.getElementById('add-featured-anime-form').addEventListener('submit', async (event) => {
+        event.preventDefault();
 
+        const featuredAnimeName = document.getElementById('featuredAnimeName').value;
+        const featuredAnimeThumbnail = document.getElementById('featuredAnimeThumbnail').value;
+
+        const featuredAnimeData = {
+            name: featuredAnimeName,
+            thumbnail: featuredAnimeThumbnail
+        };
+
+        try {
+            const response = await fetch('/addFeaturedAnime', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(featuredAnimeData)
+            });
+
+            if (response.ok) {
+                alert('Featured anime added successfully!');
+                loadFeaturedAnime(); // Refresh the featured anime thumbnails
+            } else {
+                alert('Error adding featured anime');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred');
+        }
+    });
 deleteEpisodeForm.addEventListener('submit', async (event) => {
     event.preventDefault();
 
-    const anime = document.getElementById('deleteAnime').value;
-    const episodeNumber = document.getElementById('deleteEpisodeNumber').value;
+    const deleteAnime = document.getElementById('deleteAnime').value;
+    const deleteEpisodeNumber = document.getElementById('deleteEpisodeNumber').value;
 
-    const episodeData = {
-        anime,
-        episodeNumber: parseInt(episodeNumber)
+    const deleteEpisodeData = {
+        anime: deleteAnime,
+        episodeNumber: parseInt(deleteEpisodeNumber)
     };
 
     try {
@@ -93,7 +143,7 @@ deleteEpisodeForm.addEventListener('submit', async (event) => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(episodeData)
+            body: JSON.stringify(deleteEpisodeData)
         });
 
         if (response.ok) {
@@ -112,7 +162,7 @@ deleteEpisodeForm.addEventListener('submit', async (event) => {
         const episodeForm = document.getElementById('episode-form');
 
         addEpisodeButton.addEventListener('click', () => {
-            episodeForm.style.display = 'block';
+            toggleFormVisibility('episode-form')
         });
         document.getElementById('episode-form').addEventListener('submit', async (event) => {
             event.preventDefault();
@@ -154,7 +204,7 @@ deleteEpisodeForm.addEventListener('submit', async (event) => {
         const addAnimeForm = document.getElementById('addAnimeForm');
         
         addAnimeButton.addEventListener('click', () => {
-            addAnimeForm.style.display = 'block';
+            toggleFormVisibility('addAnimeForm');
         });
 
         addAnimeForm.addEventListener('submit', async (event) => {
@@ -191,6 +241,15 @@ try {
     alert('An error occurred');
 }
    });
+   function toggleFormVisibility(formId) {
+    console.log('Toggling form visibility for:', formId);
+    const form = document.getElementById(formId);
+    if (form.style.display === 'block') {
+        form.style.display = 'none';
+    } else {
+        form.style.display = 'block';
+    }
+}
 
     </script>
 </body>

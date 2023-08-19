@@ -86,10 +86,26 @@ button:hover {
     transition: background-color 0.3s ease-in-out;
 }
 
-.addepisodebtn:hover {
-    background-color: #219652;
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 20px;
+    text-align: center;
+    margin-top: 20px;
 }
 
+.box {
+    padding: 2px;
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+}
+
+.add-featured-anime-form {
+    margin-left: 100px;
+}
 .add-anime-form {
     display: none;
     padding: 20px;
@@ -97,6 +113,7 @@ button:hover {
     border-radius: 5px;
     margin-top: 20px;
     background-color: #f2f2f2;
+    padding: 10px;
 }
 
 footer {

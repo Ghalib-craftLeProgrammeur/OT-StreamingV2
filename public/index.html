@@ -22,10 +22,7 @@
         <h2>Anime en vedette</h2>
         <!-- Add thumbnail images for featured anime here -->
         <div class="thumbnail-container">
-            <a href="anime.html?name=Naruto"><img src="https://m.media-amazon.com/images/M/MV5BZmQ5NGFiNWEtMmMyMC00MDdiLTg4YjktOGY5Yzc2MDUxMTE1XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_.jpg" width="140" alt="Featured Anime 1"></a>
-            <a href="anime.html?name=OnePiece"><img src="https://static.tvtropes.org/pmwiki/pub/images/2e5c6d37_566f_4274_b62d_ebf5fcbd0722.png" width="140" alt="Featured Anime 2"></a>
-            <a href="admin/index.html"><img src="featured2.jpg" alt="Featureds Anime 2"></a>
-          
+            
             <!-- Add more featured anime thumbnails here -->
         </div>
     </section>
@@ -68,5 +65,32 @@
     </div>
 
     <script src="script.js"></script>
+    <script>
+        // Function to fetch and display featured anime thumbnails
+        function loadFeaturedAnime() {
+            const thumbnailContainer = document.getElementById('thumbnail-container');
+    
+            // Fetch the list of featured anime from the server
+            fetch('/getFeaturedAnime')
+                .then(response => response.json())
+                .then(featuredAnimeList => {
+                    thumbnailContainer.innerHTML = '';
+    
+                    // Generate thumbnail elements for each featured anime
+                    featuredAnimeList.forEach(featuredAnime => {
+                        const thumbnail = document.createElement('a');
+                        thumbnail.href = `anime.html?name=${featuredAnime.name}`;
+                        thumbnail.innerHTML = `<img src="${featuredAnime.thumbnail}" width="140" alt="${featuredAnime.name}">`;
+                        thumbnailContainer.appendChild(thumbnail);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching featured anime:', error);
+                });
+        }
+    
+        // Call the loadFeaturedAnime function when the page loads
+        window.onload = loadFeaturedAnime;
+    </script>
 </body>
 </html>
