@@ -87,7 +87,6 @@ app.delete('/deleteEpisode', (req, res) => {
         res.status(404).json({ error: 'Anime not found' });
     }
 });
-
 // Route to add a new anime
 app.post('/addAnime', (req, res) => {
     const newAnime = req.body;
@@ -104,7 +103,6 @@ app.post('/addAnime', (req, res) => {
     const animeObject = {
         title: newAnime.title,
         totalEpisodes: newAnime.totalEpisodes,
-        // Add more properties as needed for the new anime
         episodes: [] // Initialize episodes as an empty array
     };
 
@@ -115,7 +113,6 @@ app.post('/addAnime', (req, res) => {
     fs.writeFileSync('data.json', JSON.stringify(data, null, 2), 'utf8');
     res.json({ message: 'New anime added successfully' });
 });
-
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
