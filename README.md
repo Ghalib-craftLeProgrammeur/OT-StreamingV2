@@ -1,6 +1,6 @@
 # OT Streaming Admin Panel
 
-![OT Streaming]
+[OT Streaming]
 
 ## Description
 
