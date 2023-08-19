@@ -14,30 +14,29 @@ OT Streaming is a web application that allows users to watch and stream anime ep
 ## Installation
 
 1. Clone this repository to your local machine.
-```bash
+   ```bash
       git clone https://github.com/your-username/ot-streaming.git
-```
-- Navigate to the project directory.
+2. Navigate to the project directory.
 
 
 
   ```bash
   cd ot-streaming
 ```
-- Install the required dependencies.
+3. Install the required dependencies.
 
 
 
 ```bash
 npm install
 ```
-- Start the server.
+4. Start the server.
 
 
 ```bash
 npm start
 ```
-- Open your web browser and navigate to http://localhost:3000 to access OT Streaming.
+5. Open your web browser and navigate to http://localhost:3000 to access OT Streaming.
 
 # Usage
 - Browse through the list of available anime series on the homepage.
