@@ -1,71 +1,64 @@
-# OT Streaming Admin Panel
+# OT Streaming
 
-[OT Streaming]
-
-## Description
-
-OT Streaming Admin Panel is a web application that allows administrators to manage anime episodes and featured anime for the OT Streaming platform. It provides a user-friendly interface for adding, deleting, and managing episodes and featured anime.
+OT Streaming is a web application that allows users to watch and stream anime episodes online. This application provides a user-friendly interface for browsing and watching anime episodes, along with features for adding new episodes, managing anime information, and more.
 
 ## Features
 
-- Add new anime episodes with embed codes
-- Delete existing anime episodes
-- Add and manage featured anime with thumbnails
-- User-friendly web interface for easy management
+- Browse and watch anime episodes online.
+- Add new episodes to existing anime series.
+- Manage anime details such as title, description, and episode list.
+- Mark episodes as watched to keep track of your progress.
+- Featured anime section to showcase popular series.
+- User-friendly admin panel for managing anime data.
 
-## Getting Started
+## Installation
 
-### Prerequisites
+1. Clone this repository to your local machine.
+   ```bash
+   git clone https://github.com/your-username/ot-streaming.git
+Navigate to the project directory.
 
-- Node.js (version 20.3.0)
-- npm (version 9.7.1)
-- Express.js (version 4.18.2)
-- ...
 
-### Installation
-
-1. Clone the repository: `git clone https://github.com/your-username/ot-streaming-admin.git`
-2. Navigate to the project directory: `cd ot-streaming-admin`
-3. Install dependencies: `npm install`
-
-### Usage
-
-1. Run the server: `npm start`
-2. Access the admin panel in your browser: `http://localhost:3000/admin`
-
-## Data Structure
-
-The anime and episode data is stored in a JSON file named `data.json`. The JSON structure looks like this:
-
-```json
-[
-  {
-    "title": "Naruto",
-    "description": "A popular anime series about ninjas.",
-    "episodes": [
-      {
-        "anime": "Naruto",
-        "episodeNumber": 1,
-        "embedCode": "<IFRAME SRC=\"...\" FRAMEBORDER=0 ...></IFRAME>",
-        "nextEpisode": 2
-      },
-      {
-        "anime": "Naruto",
-        "episodeNumber": 2,
-        "embedCode": "<IFRAME SRC=\"...\" FRAMEBORDER=0 ...></IFRAME>",
-        "nextEpisode": 3
-      }
-    ]
-  },
-  {
-    "title": "OnePiece",
-    "description": "A popular anime series about Pirates.",
-    "episodes": []
-  }
-]
+Copy code
+  ```bash
+  cd ot-streaming
 ```
-Contributing
-Contributions are welcome! If you find a bug or want to suggest an improvement, please open an issue or submit a pull request.
+Install the required dependencies.
 
-License
+
+Copy code
+```bash
+npm install
+```
+Start the server.
+
+
+Copy code
+```bash
+npm start
+```
+Open your web browser and navigate to http://localhost:3000 to access OT Streaming.
+
+# Usage
+- Browse through the list of available anime series on the homepage.
+- Click on an anime title to view its details and episode list.
+- Click on an episode to start streaming and watching it.
+- Use the admin panel to manage anime data, add new episodes, and update information.
+# Contributing
+Contributions are welcome! If you would like to contribute to OT Streaming, follow these steps:
+
+- Fork the repository on GitHub.
+- Clone your forked repository to your local machine.
+- Create a new branch for your feature or bug fix.
+- Make your changes and test them thoroughly.
+- Commit your changes and push them to your GitHub repository.
+- Create a pull request from your branch to the main repository.
+# License
 This project is licensed under the MIT License.
+
+# Acknowledgements
+OT Streaming was inspired by a love for anime and the desire to create an enjoyable streaming experience for fans. Special thanks to the open-source community and contributors who have helped make this project possible.
+
+For more information, contact me in discord ghalibcraft.
+
+
