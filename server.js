@@ -16,13 +16,16 @@ app.delete('/deleteEpisode', (req, res) => {
     const episodeNumber = parseInt(req.body.episodeNumber);
 
     const data = JSON.parse(fs.readFileSync('data.json', 'utf8'));
-    const animeIndex = data.findIndex(anime => anime.title === animeTitle);
+    const animeIndex = data.animeList.findIndex(anime => anime.title === animeTitle);
 
     if (animeIndex !== -1) {
-        const episodeIndex = data[animeIndex].episodes.findIndex(episode => episode.episodeNumber === episodeNumber);
+        // Initialize episodes as an empty array if not already defined
+        data.animeList[animeIndex].episodes = data.animeList[animeIndex].episodes || [];
+
+        const episodeIndex = data.animeList[animeIndex].episodes.findIndex(episode => episode.episodeNumber === episodeNumber);
         
         if (episodeIndex !== -1) {
-            data[animeIndex].episodes.splice(episodeIndex, 1);
+            data.animeList[animeIndex].episodes.splice(episodeIndex, 1);
             fs.writeFileSync('data.json', JSON.stringify(data, null, 2), 'utf8');
             res.json({ message: 'Episode deleted successfully' });
         } else {
@@ -33,23 +36,33 @@ app.delete('/deleteEpisode', (req, res) => {
     }
 });
 
-// Route to add an episode
+
+
 app.post('/addEpisode', (req, res) => {
     const newEpisode = req.body;
     const data = JSON.parse(fs.readFileSync('data.json', 'utf8'));
-    const animeIndex = data.findIndex(anime => anime.title === newEpisode.anime);
+
+    // Find the index of the anime with the specified title
+    const animeIndex = data.animeList.findIndex(anime => anime.title === newEpisode.anime);
+
     if (animeIndex !== -1) {
-        if (!data[animeIndex].episodes) {
-            data[animeIndex].episodes = []; // Initialize episodes as an empty array if not already defined
-        }
-        data[animeIndex].episodes.push(newEpisode);
+        // Initialize episodes as an empty array if not already defined
+        data.animeList[animeIndex].episodes = data.animeList[animeIndex].episodes || [];
+
+        // Push the new episode to the 'episodes' array of the anime
+        data.animeList[animeIndex].episodes.push(newEpisode);
+
+        // Write the updated data back to the 'data.json' file
         fs.writeFileSync('data.json', JSON.stringify(data, null, 2), 'utf8');
+
         res.json({ message: 'Episode added successfully' });
     } else {
+        // Return an error response if the anime is not found
         res.status(404).json({ error: 'Anime not found' });
     }
-    
 });
+
+
 app.post('/addFeaturedAnime', (req, res) => {
     const newFeaturedAnime = req.body;
     const data = JSON.parse(fs.readFileSync('data.json', 'utf8'));
