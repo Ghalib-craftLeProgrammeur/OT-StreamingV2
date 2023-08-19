@@ -53,6 +53,9 @@ app.post('/addFeaturedAnime', (req, res) => {
     const newFeaturedAnime = req.body;
     const data = JSON.parse(fs.readFileSync('data.json', 'utf8'));
 
+    // Initialize featuredAnime array if not already defined
+    data.featuredAnime = data.featuredAnime || [];
+
     // Add the new featured anime to the list
     data.featuredAnime.push(newFeaturedAnime);
 
@@ -60,6 +63,7 @@ app.post('/addFeaturedAnime', (req, res) => {
     fs.writeFileSync('data.json', JSON.stringify(data, null, 2), 'utf8');
     res.json({ message: 'Featured anime added successfully' });
 });
+
 
 // Route to get the list of featured anime
 app.get('/getFeaturedAnime', (req, res) => {
