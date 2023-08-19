@@ -17,9 +17,9 @@ OT Streaming Admin Panel is a web application that allows administrators to mana
 
 ### Prerequisites
 
-- Node.js (version X.X.X)
-- npm (version X.X.X)
-- Express.js (version X.X.X)
+- Node.js (version 20.3.0)
+- npm (version 9.7.1)
+- Express.js (version 4.18.2)
 - ...
 
 ### Installation
