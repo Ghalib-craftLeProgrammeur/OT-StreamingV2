@@ -11,12 +11,23 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Route to get anime dvetails
-app.get('/getAnimeDetails', (req, res) => {
-    const animeName = req.query.name;
+app.delete('/deleteEpisode', (req, res) => {
+    const animeTitle = req.body.anime;
+    const episodeNumber = parseInt(req.body.episodeNumber);
+
     const data = JSON.parse(fs.readFileSync('data.json', 'utf8'));
-    const animeDetails = data.find(anime => anime.title === animeName);
-    if (animeDetails) {
-        res.json(animeDetails);
+    const animeIndex = data.findIndex(anime => anime.title === animeTitle);
+
+    if (animeIndex !== -1) {
+        const episodeIndex = data[animeIndex].episodes.findIndex(episode => episode.episodeNumber === episodeNumber);
+        
+        if (episodeIndex !== -1) {
+            data[animeIndex].episodes.splice(episodeIndex, 1);
+            fs.writeFileSync('data.json', JSON.stringify(data, null, 2), 'utf8');
+            res.json({ message: 'Episode deleted successfully' });
+        } else {
+            res.status(404).json({ error: 'Episode not found' });
+        }
     } else {
         res.status(404).json({ error: 'Anime not found' });
     }
@@ -35,6 +46,28 @@ app.post('/addEpisode', (req, res) => {
         res.status(404).json({ error: 'Anime not found' });
     }
 });
+// Route to delete an episode
+app.delete('/deleteEpisode', (req, res) => {
+    const animeTitle = req.body.anime;
+    const episodeNumber = parseInt(req.body.episodeNumber);
+
+    const data = JSON.parse(fs.readFileSync('data.json', 'utf8'));
+    const animeIndex = data.findIndex(anime => anime.title === animeTitle);
+
+    if (animeIndex !== -1) {
+        const episodeIndex = data[animeIndex].episodes.findIndex(episode => episode.episodeNumber === episodeNumber);
+        if (episodeIndex !== -1) {
+            data[animeIndex].episodes.splice(episodeIndex, 1);
+            fs.writeFileSync('data.json', JSON.stringify(data, null, 2), 'utf8');
+            res.json({ message: 'Episode deleted successfully' });
+        } else {
+            res.status(404).json({ error: 'Episode not found' });
+        }
+    } else {
+        res.status(404).json({ error: 'Anime not found' });
+    }
+});
+
 // Route to add a new anime
 app.post('/addAnime', (req, res) => {
     const newAnime = req.body;

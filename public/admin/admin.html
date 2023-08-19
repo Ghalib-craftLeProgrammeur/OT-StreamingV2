@@ -47,6 +47,19 @@
 
             <button type="submit" style="width: 380px;">Add Anime</button>
         </form>
+        <button id="deleteEpisodeButton" class="delete-episode-button" style="width: 422px;">Delete Episode</button>
+
+<form class="delete-episode-form" id="deleteEpisodeForm" style="display: none;">
+    <h2>Delete Episode</h2>
+    <label for="deleteAnime">Anime Name:</label>
+    <input type="text" style="width: 360px;" id="deleteAnime" name="deleteAnime" required><br>
+
+    <label for="deleteEpisodeNumber">Episode Number:</label>
+    <input type="number" style="width: 360px;" id="deleteEpisodeNumber" name="deleteEpisodeNumber" required><br>
+
+    <button type="submit" style="width: 380px;">Delete Episode</button>
+</form>
+
     </main>
     
     
@@ -55,7 +68,46 @@
     </footer>
 
     <script>
-       
+       // Delete Episode
+const deleteEpisodeButton = document.getElementById('deleteEpisodeButton');
+const deleteEpisodeForm = document.getElementById('deleteEpisodeForm');
+
+deleteEpisodeButton.addEventListener('click', () => {
+    deleteEpisodeForm.style.display = 'block';
+});
+
+deleteEpisodeForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const anime = document.getElementById('deleteAnime').value;
+    const episodeNumber = document.getElementById('deleteEpisodeNumber').value;
+
+    const episodeData = {
+        anime,
+        episodeNumber: parseInt(episodeNumber)
+    };
+
+    try {
+        const response = await fetch('/deleteEpisode', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(episodeData)
+        });
+
+        if (response.ok) {
+            alert('Episode deleted successfully!');
+            deleteEpisodeForm.reset();
+        } else {
+            alert('Error deleting episode');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred');
+    }
+});
+
        const addEpisodeButton = document.getElementById('addepisodebtn');
         const episodeForm = document.getElementById('episode-form');
 
