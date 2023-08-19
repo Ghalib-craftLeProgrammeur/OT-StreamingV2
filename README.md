@@ -19,21 +19,20 @@ OT Streaming is a web application that allows users to watch and stream anime ep
 Navigate to the project directory.
 
 
-Copy code
+
   ```bash
   cd ot-streaming
 ```
 Install the required dependencies.
 
 
-Copy code
+
 ```bash
 npm install
 ```
 Start the server.
 
 
-Copy code
 ```bash
 npm start
 ```
