@@ -63,6 +63,7 @@ The anime and episode data is stored in a JSON file named `data.json`. The JSON 
     "episodes": []
   }
 ]
+````
 Contributing
 Contributions are welcome! If you find a bug or want to suggest an improvement, please open an issue or submit a pull request.
 
