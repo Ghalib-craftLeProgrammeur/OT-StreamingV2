@@ -1,6 +1,9 @@
 # OT Streaming Admin Panel
 
-![OT Streaming Logo](https://i.ibb.co/Jn7NnJL/output.png)
+
+<div align="center">
+  <img src="https://i.ibb.co/Jn7NnJL/output.png" alt="OT Streaming Logo" width="200">
+</div>
 
 ## Description
 
