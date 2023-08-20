@@ -19,14 +19,20 @@ body {
     text-align: center;
 }
 
+h1 {
+    margin-bottom: 20px;
+}
+
+svg {
+    display: block;
+    margin-bottom: 6px;
+    margin-left: 47%;
+}
 .form h1 {
     margin-bottom: 20px;
 }
 
-.form label {
-    display: block;
-    margin-bottom: 6px;
-}
+
 
 .form input {
     width: 100%;
@@ -49,7 +55,24 @@ body {
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
 }
-
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
 .form button:hover {
     background-color: #2980b9;
+}
+main {
+    background-color: #ffffff;
+    padding: 21px;
+    border-radius: 10px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.1);
+    width: 410px;
+    text-align: center;
 }

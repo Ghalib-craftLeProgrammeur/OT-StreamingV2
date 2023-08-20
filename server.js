@@ -101,6 +101,14 @@ app.get('/getFeaturedAnime', (req, res) => {
     const data = JSON.parse(fs.readFileSync('data.json', 'utf8'));
     res.json(data.featuredAnime);
 });
+const defaultData = {
+    animeList: [],
+    featuredAnime: []
+};
+const dataPath = path.join(__dirname, 'data.json');
+if (!fs.existsSync(dataPath)) {
+    fs.writeFileSync(dataPath, JSON.stringify(defaultData, null, 2), 'utf8');
+}
 // Route to delete an episode
 app.delete('/deleteEpisode', (req, res) => {
     const animeTitle = req.body.anime;
