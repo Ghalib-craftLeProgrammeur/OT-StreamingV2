@@ -5,18 +5,43 @@
     --primary-color: #ff0000;
 }
 
+.translated-description {
+    margin-top: 20px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+    background-color: #f7f7f7;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.VideoEmbed{
+    font-size: xx-large;
+    font: 1em sans-serif;
+size: 49px;    
+}
 body {
     font-family: Arial, sans-serif;
     background-color: var(--background-color);
     color: var(--text-color);
     transition: background-color 0.5s, color 0.5s;
     margin: 0;
-     background-size: 10px 10px;
+    background-size: 10px 10px;
     background-position: 0 0, 0 0, 100% 100%, 100% 100%;
     background-repeat: repeat-x, repeat-y, repeat-x, repeat-y;
 }
 
-/* ... (rest of the styles) */
+/* Add styles for the anime description */
+.anime-description {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #63636336;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    text-align: left;
+}
 
 a {
     color: var(--primary-color);
@@ -76,16 +101,11 @@ nav ul li a:hover {
     justify-content: space-between;
 }
 
-.category-card {
-    width: calc(33.33% - 1rem);
-    margin-bottom: 2rem;
-    text-align: center;
-}
+.category-card,
 .category-cards {
     width: calc(33.33% - 1rem);
     margin-bottom: 2rem;
-    text-align: right;
-    margin-left: 10%;
+    text-align: center;
 }
 
 .category-card img {
@@ -114,23 +134,35 @@ footer {
     align-items: center; /* Vertically center the content */
 }
 
-.category-list {
-    background-color: var(--background-color);
-    color: var(--text-color);
-    padding: 20px;
-    border: 1px solid var(--text-color);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    width: 60%;
-    max-width: 600px;
-    text-align: center;
+
+
+
+/* Dark Mode Styles */
+/* ... (existing styles) */
+
+/* Add more styles for responsiveness as needed */
+
+.NavMyUL li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc; /* Add a border between results */
+    text-align: left;
+    color: #000; /* Set the text color to black */
+    font-size: 16px;
+    display: block; /* Display each result on a new line */
 }
 
+.NavMyUL li:last-child {
+    border-bottom: none; /* Remove the border from the last result */
+}
 
-.close-popup {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    color: var(--text-color);
-    font-size: 20px;
-    cursor: pointer;
+button#search-button:hover {
+    background-color: #333;
+}
+img{
+    height: 200px;
+    transition: transform 0.3s ease-in-out; /* Adding smooth transition effect */
+
+}
+img:hover {
+    transform: translateY(-10px); /* Adjust the value as needed for the desired upward movement */
 }

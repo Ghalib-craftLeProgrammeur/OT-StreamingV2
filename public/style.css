@@ -1,0 +1,175 @@
+/* Reset some default styles */
+
+
+/* Style the header */
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+h1 {
+    font-size: 36px;
+}
+
+/* Style the navigation menu */
+nav ul {
+    list-style: none;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #66ccff;
+}
+
+/* Style the featured section */
+.featured {
+    text-align: center;
+    padding: 40px 0;
+}
+
+.featured h2 {
+    font-size: 24px;
+    color: #333;
+}
+
+
+.thumbnail-container a {
+    margin: 10px;
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+    transition: transform 0.3s;
+}
+
+.thumbnail-container a:hover, a:active, a:focus {
+    transform: scale(1.05);
+}
+/* Reset some default styles */
+/* ... (existing styles) */
+
+/* Style the search bar */
+input[type="text"] {
+    width: 250px;
+    border: none;
+    border-radius: 28px;
+    text-align: center;
+    font-size: 16px;
+    height: 30px;
+}
+
+button#search-button {
+    background-color: #66ccff;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Style the search results */
+.NavMyUL {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    right: 0px;
+    top: 165px;
+    position: absolute;
+    display: grid;
+    background-color: #5e5e5e; /* Background color for the results */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #000; /* Set the text color to black */
+    width: 280px;
+    max-height: 180px; /* Limit the maximum height of the results */
+    margin-bottom: 5px;
+}
+/* Reset some default styles */
+/* ... (existing styles) */
+
+/* Add styles for mobile responsiveness */
+@media screen and (max-width: 600px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul {
+        flex-direction: column;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    nav ul li {
+        margin: 5px 0;
+    }
+
+    #search-input {
+        width: 100%;
+    }
+    
+    .NavMyUL {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            right: 54px;
+            top: 470px;
+            position: absolute;
+            display: grid;
+            background-color: #5e5e5e; /* Background color for the results */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            color: #000; /* Set the text color to black */
+            width: 280px;
+            max-height: 180px; /* Limit the maximum height of the results */
+            margin-bottom: 5px;
+        
+    }
+    
+    .NavMyUL li {
+        width: 100%;
+        padding: 10px;
+        text-align: center;
+    }
+
+  
+}
+/* ... (existing styles) */
+
+
+/* ... (existing styles) */
+
+/* Dark Mode Styles */
+/* ... (existing styles) */
+
+/* Add more styles for responsiveness as needed */
+
+.NavMyUL li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc; /* Add a border between results */
+    text-align: left;
+    color: #000; /* Set the text color to black */
+    font-size: 16px;
+    display: block; /* Display each result on a new line */
+}
+
+.NavMyUL li:last-child {
+    border-bottom: none; /* Remove the border from the last result */
+}
+
+
+button#search-button:hover {
+    background-color: #333;
+}
+

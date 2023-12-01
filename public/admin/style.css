@@ -22,6 +22,36 @@ body {
 h1 {
     margin-bottom: 20px;
 }
+/* Style the header */
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+/* Style the navigation menu */
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-between; /* Align navigation items horizontally */
+    align-items: center; /* Center items vertically */
+    padding: 0; /* Remove padding from the ul element */
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #66ccff;
+}
 
 svg {
     display: block;

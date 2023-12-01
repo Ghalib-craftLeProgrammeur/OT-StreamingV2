@@ -1,6 +1,15 @@
 {
   "dependencies": {
-    "express": "^4.18.2"
+    "@vitalets/google-translate-api": "^9.2.0",
+    "alerts-npm": "^1.0.0",
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2",
+    "firebase": "^10.6.0",
+    "firebase-admin": "^11.11.0",
+    "firebaseui": "^6.1.0",
+    "node-fetch": "^3.3.2"
+  },
+  "scripts": {
+    "start": "node ./server.mjs"
   }
-  
 }

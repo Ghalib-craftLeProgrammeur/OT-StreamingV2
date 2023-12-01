@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>Anime Details</title>
+    
     <style>
         /* Add CSS styles to center-align the content */
         .anime-details {
@@ -14,7 +15,11 @@
             justify-content: center;
             min-height: 100vh;
         }
-
+        .VideoEmbed{
+    font-size: xx-large;
+    font: 1em sans-serif;
+size: 49px;    
+}
         .episode {
             text-align: center;
         }
@@ -22,11 +27,15 @@
         .navigation {
             margin-top: 16px;
         }
+        .EpisodeNumber {
+            font: 1em bold;
+            font-size: 25px;
+        }
     </style>
 </head>
 <body>
     <header>
-        <h1>Anime Details</h1>
+        <h1 id="anime-infos"></h1>
     </header>
     
     <main class="anime-details">
@@ -39,92 +48,7 @@
         <p>&copy; 2023 OT Streaming. Tous droits réservés.</p>
     </footer>
 
-    <script>
-        // Function to parse query parameters from URL
-        function getQueryParam(name) {
-            const urlSearchParams = new URLSearchParams(window.location.search);
-            return urlSearchParams.get(name);
-        }
+ 
 
-        // Function to fetch and display anime details based on query parameter
-        function loadAnimeDetails() {
-    const animeInfo = document.getElementById('anime-info');
-    const animeName = getQueryParam('name');
-
-    // Fetch anime details from the server
-    fetch(`/getAnimeDetails?name=${animeName}`)
-        .then(response => response.json())
-        .then(animeDetails => {
-            const episodes = animeDetails.animeList.episodes; // Access episodes array
-            const totalEpisodes = animeDetails.animeList.totalEpisodes; // Access totalEpisodes value
-
-            if (episodes && episodes.length > 0) {
-                const episodesContainer = document.createElement('div');
-                
-                animeInfo.innerHTML = ''; // Clear existing content
-
-                let currentEpisodeIndex = 0;
-
-                const displayEpisode = (episodeIndex) => {
-                    if (episodeIndex >= 0 && episodeIndex < episodes.length) {
-                        const episode = episodes[episodeIndex];
-
-                        episodesContainer.innerHTML = ''; // Clear existing content
-
-                        const episodeElement = document.createElement('div');
-                        episodeElement.classList.add('episode');
-
-                        const embedCode = document.createElement('div');
-                        embedCode.innerHTML = episode.embedCode;
-
-                        const navigation = document.createElement('div');
-                        navigation.classList.add('navigation');
-
-                        const prevEpisodeButton = document.createElement('button');
-                        prevEpisodeButton.textContent = 'Previous Episode';
-                        prevEpisodeButton.disabled = episodeIndex === 0;
-                        prevEpisodeButton.addEventListener('click', () => {
-                            displayEpisode(episodeIndex - 1);
-                        });
-
-                        const nextEpisodeButton = document.createElement('button');
-                        nextEpisodeButton.textContent = 'Next Episode';
-                        nextEpisodeButton.disabled = episodeIndex === episodes.length - 1;
-                        nextEpisodeButton.addEventListener('click', () => {
-                            displayEpisode(episodeIndex + 1);
-                        });
-    // Display the total number of episodes
-    const totalEpisodesElement = document.createElement('p');
-                    totalEpisodesElement.textContent = `${episodeIndex + 1} / ${totalEpisodes} episodes`;
-                    totalEpisodesElement.classList.add('total-episodes');
-                    episodesContainer.appendChild(totalEpisodesElement);
-
-                        navigation.appendChild(prevEpisodeButton);
-                        navigation.appendChild(nextEpisodeButton);
-
-                        episodeElement.appendChild(embedCode);
-                        episodeElement.appendChild(navigation);
-                        episodesContainer.appendChild(episodeElement);
-
-                        animeInfo.innerHTML = ''; // Clear existing content
-                        animeInfo.appendChild(episodesContainer);
-                    }
-                };
-
-                displayEpisode(currentEpisodeIndex);
-            } else {
-                animeInfo.innerText = "Anime doesn't have any episode";
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching anime details:', error);
-            animeInfo.innerText = "Error fetching anime details";
-        });
-}
-
-
-        // Call the loadAnimeDetails function when the page loads
-        window.onload = loadAnimeDetails;
-    </script>
-</body>
+<script src="anime.js"></script></body>
 </html>
