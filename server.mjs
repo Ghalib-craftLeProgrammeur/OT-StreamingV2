@@ -1,5 +1,5 @@
 // server.mjs
-import express from "express";
+import express, { query } from "express";
 import fetch from "node-fetch";
 import fs from "fs";
 import path from "path"; // Import the 'path' module
@@ -68,9 +68,9 @@ function pingService(url) {
     },
   })
     .then((response) => {
-      if (response.status === 200) {
-        console.log(`Ping to ${url} successful`);
-      } else {
+      if (response.status != 200) {
+      
+      
         console.error(
           `Ping to ${url} returned status code: ${response.status}`
         );
@@ -81,6 +81,43 @@ function pingService(url) {
       console.error(consoleError, error);
     });
 }
+app.get("/api/getLastAddedEpisodes", async (req, res) => {
+  try {
+    const animeRef = db.collection("anime");
+    const animeDocs = await animeRef.get();
+
+    const lastModifiedEpisodes = [];
+
+    // Loop through all anime documents and their episodes to find the last modified ones
+    for (const animeDoc of animeDocs.docs) {
+      const animeName = animeDoc.id;
+      const episodesRef = animeRef.doc(animeName).collection("episodes");
+      const querySnapshot = await episodesRef.orderBy("lastModified", "desc").limit(3).get();
+
+      querySnapshot.forEach((doc) => {
+        const episodeData = doc.data();
+        lastModifiedEpisodes.push({ anime: animeName, ...episodeData });
+      });
+    }
+
+    // Sort the episodes based on lastModified time
+    lastModifiedEpisodes.sort((a, b) => b.lastModified._seconds - a.lastModified._seconds);
+
+    // Get the top 3 newest episodes
+    const top3NewestEpisodes = lastModifiedEpisodes.slice(0, 3);
+
+    res.json(top3NewestEpisodes);
+  } catch (error) {
+    console.error("Error getting last added episodes:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+
+
+
+
+
 
 // Route to translate text
 app.post("/api/translate", async (req, res) => {
@@ -98,40 +135,43 @@ app.post("/api/translate", async (req, res) => {
     res.json({ message: textToTranslate });
   }
 });
-
-
-// Route to add a new episode to an existing anime
 app.post("/api/addEpisode", async (req, res) => {
-    try {
-      const newEpisode = req.body;
-  
-// Check if required fields are present in the request body
-const missingFields = [];
-if (!newEpisode.anime) missingFields.push("anime");
-if (!newEpisode.episodeNumber) missingFields.push("episodeNumber");
-if (!newEpisode.embedCode) missingFields.push("embedCode");
-if (!newEpisode.nextEpisodeNumber) missingFields.push("nextEpisodeNumber");
+  try {
+    const newEpisode = req.body;
 
-if (missingFields.length > 0) {
-  return res.status(400).json({ error: `Missing required fields: ${missingFields.join(', ')}` });
-}
+    // Check if required fields are present in the request body
+    const missingFields = [];
+    if (!newEpisode.anime) missingFields.push("anime");
+    if (!newEpisode.episodeNumber) missingFields.push("episodeNumber");
+    if (!newEpisode.embedCode) missingFields.push("embedCode");
+    if (!newEpisode.nextEpisodeNumber) missingFields.push("nextEpisodeNumber");
 
-  
-      // Create a reference to the anime document based on the provided anime
-      const animeRef = db.collection("anime").doc(newEpisode.anime.toLowerCase()).collection("episodes").doc(newEpisode.episodeNumber.toString());
-  
-    
-     
-      await animeRef.set({
-        "episodeNumber": newEpisode.episodeNumber,
-        'embedCode': newEpisode.embedCode,
-      });
-      res.json({ message: "Episode added successfully" });
-    } catch (error) {
-      console.error("Error adding episode:", error);
-      res.status(500).json({ error: "Internal Server Error" });
+    if (missingFields.length > 0) {
+      return res.status(400).json({ error: `Missing required fields: ${missingFields.join(', ')}` });
     }
-  });
+
+    const currentTime = new Date(); // Get the current time
+
+    // Create references to the anime document and episode sub-collection
+    const animeRef = db.collection("anime").doc(newEpisode.anime);
+    const episodeRef = animeRef.collection("episodes").doc(newEpisode.episodeNumber.toString());
+    console.log(newEpisode.episodeNumber.toString());
+    // Set the episode data with the lastModified field as the current time
+    await episodeRef.set({
+      episodeNumber: newEpisode.episodeNumber,
+      embedCode: newEpisode.embedCode,
+      nextEpisodeNumber: newEpisode.nextEpisodeNumber,
+      lastModified: currentTime,
+      // Include any other fields relevant to the episode
+    });
+    res.json({ message: "Episode added successfully" });
+  } catch (error) {
+    console.error("Error adding episode:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+
   
 
 app.post("/api/addFeaturedAnime", async (req, res) => {
@@ -327,13 +367,15 @@ app.post("/api/addAnime", async (req, res) => {
       totalEpisodes: animeObject.totalEpisodes,
     });
   
+
+    const currentTime = new Date(); // Get the current time
     for (let episode = 1; episode <= animeObject.totalEpisodes; episode++) {
       const episodeContainers = db
         .collection("anime")
         .doc(animeObject.title)
         .collection("episodes")
         .doc(episode.toString()); 
-      await episodeContainers.set({ episodeNumber: episode, embedCode: null });
+      await episodeContainers.set({ episodeNumber: episode, embedCode: null, "lastModified": currentTime  });
     }
   
     res.status(200).json({ message: "Anime Added Succesfully"});

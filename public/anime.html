@@ -6,7 +6,11 @@
     <link rel="stylesheet" href="styles.css">
     <title>Anime Details</title>
     
+    <link rel="icon" href="https://i.ibb.co/LJ1Vz5x/svgviewer-png-output.png" type="image/png">
     <style>
+       body {
+        overflow: hidden;
+       } 
         /* Add CSS styles to center-align the content */
         .anime-details {
             display: flex;
@@ -20,6 +24,30 @@
     font: 1em sans-serif;
 size: 49px;    
 }
+/* Style for the buttons */
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #3498db;
+  color: white;
+  font-size: 16px;
+  margin: 5px;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect */
+button:hover {
+  background-color: #2980b9;
+}
+
+/* Disabled state */
+button:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+}
+
         .episode {
             text-align: center;
         }
@@ -34,7 +62,10 @@ size: 49px;
     </style>
 </head>
 <body>
+    
     <header>
+      <a style="height: 20px; width: 20px;" href="/"> <img  src="https://i.ibb.co/ZfgjNh1/svgviewer-png-output.png" id="LogoHome" alt="OT Streaming Logo">
+      </a>
         <h1 id="anime-infos"></h1>
     </header>
     
