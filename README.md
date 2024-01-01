@@ -20,12 +20,15 @@ OT Streaming is now available as an Electron desktop application, allowing users
 ```bash
 `git clone https://github.com/your-username/ot-streaming.git`
 ```
+then
 ```bash
 `cd ot-streaming`
 ```
+then
 ```bash
 `npm install`
 ```
+then
 ```bash
 `npm run electron`
 ```
