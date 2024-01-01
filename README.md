@@ -1,6 +1,6 @@
 # OT Streaming - Electron App
 
-OT Streaming is now available as an Electron desktop application, allowing users to watch and stream anime episodes conveniently.
+OT Streaming is now available as an Electron desktop application, allowing users to watch and stream anime episodes conveniently without any ad.
 
 ## Features
 - Browse and watch anime episodes in a desktop application.
