@@ -47,11 +47,20 @@ async function displayEpisodes(animeName) {
         const clear = document.getElementById("grid-container");
         clear.innerHTML = '<div id="episode-container" class="episode-container"><!-- Episode squares will be added here --></div><div id="episode-popup" class="episode-popup" style="display: none;"> <!-- Popup content goes here --></div>'
         const totalEpisodes = data.totalEpisodes;
+        const searchBar = document.createElement("input");
+        searchBar.type = "text";
+    
         const episodeContainer = document.getElementById('episode-container');
 
         // Clear existing content in the episodeContainer
         episodeContainer.innerHTML = '';
-
+        searchBar.addEventListener('keydown', async (key) => {
+        if(key.code === "Enter") {
+            const response = await fetch(`/api/getEpisodeDetails?episode=${searchBar.value}&animeName=${animeName}`);
+            const data = await response.json();
+            displayEpisodePopup(data, searchBar.value);
+        }
+        })
         // Loop through episodes and create squares
         for (let episodeNumber = 1; episodeNumber <= totalEpisodes; episodeNumber++) {
             const square = document.createElement('div');
@@ -66,6 +75,7 @@ async function displayEpisodes(animeName) {
             });
 
             episodeContainer.appendChild(square);
+            episodeContainer.appendChild(searchBar);
         }
     }
 }

@@ -45,6 +45,7 @@ function outsideClick(e) {
     // Function to fetch and display featured anime thumbnails
     function loadFeaturedAnime() {
         const thumbnailContainer = document.getElementById('thumbnail-container');
+        fetchLastAddedEpisodes();
         // Fetch the list of featured anime from the server
         fetch('/api/getFeaturedAnime')
             .then(response => response.json())
@@ -85,6 +86,7 @@ function outsideClick(e) {
                         const a = document.createElement('a');
                         a.href = `anime.html?name=${animeId}`;
                         a.textContent = animeId;
+                        ul.classList.add("SearchResult");
     
                         li.appendChild(a);
                         ul.appendChild(li);
@@ -97,6 +99,36 @@ function outsideClick(e) {
         }
     }
     
+
+// Inside your script.js or client-side JavaScript file
+
+// Function to fetch last added episodes from the server
+async function fetchLastAddedEpisodes() {
+    try {
+        const response = await fetch('/api/getLastAddedEpisodes'); // Replace this with your actual endpoint
+        const data = await response.json();
+
+        // Assuming the response contains an array of episodes, iterate through them
+        const episodeList = document.getElementById('last-added-list');
+
+        data.forEach(episode => {
+            const episodeItem = document.createElement('div');
+            episodeItem.classList.add('episode-item');
+            episodeItem.innerHTML = `
+                <h3>${episode.anime}</h3>
+                <p>Episode ${episode.episodeNumber}</p>
+                <!-- Add more episode details as needed -->
+            `;
+            episodeItem.style.cursor = "pointer";
+            episodeItem.addEventListener("click", () => {
+                location.href = `anime.html?name=${episode.anime}&episode=${episode.episodeNumber}`;
+            });
+            episodeList.appendChild(episodeItem);
+        });
+    } catch (error) {
+        console.error('Error fetching last added episodes:', error);
+    }
+}
 
 
 // Add an event listener to the search input to trigger the search

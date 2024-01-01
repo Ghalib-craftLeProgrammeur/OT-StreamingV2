@@ -98,7 +98,45 @@ button#search-button {
 }
 /* Reset some default styles */
 /* ... (existing styles) */
+.episode-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    background-color: #333;
+    border-radius: 10px;
+}
 
+.episode-item {
+    background-color: #444;
+    padding: 10px;
+    border-radius: 5px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.episode-item img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.episode-item h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.episode-item p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+.SearchResult {
+    transform: translateY(32px);
+}
 /* Add styles for mobile responsiveness */
 @media screen and (max-width: 600px) {
     header {

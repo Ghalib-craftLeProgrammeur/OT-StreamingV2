@@ -159,7 +159,6 @@ button#search-button:hover {
     background-color: #333;
 }
 img{
-    height: 200px;
     transition: transform 0.3s ease-in-out; /* Adding smooth transition effect */
 
 }
