@@ -27,7 +27,7 @@ OT Streaming is now available as an Electron desktop application, allowing users
 `npm install`
 ```
 ```bash
-`npm run electron`
+`npm run start`
 ```
 
 # Usage
